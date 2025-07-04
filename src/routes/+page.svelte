@@ -11,7 +11,22 @@
 	let { data } = $props();
 	let actionState = $state('starting');
 	let inputValue = $state('');
-	let debounce = $state(null);
+	let debounce = null;
+	
+	$effect(() => {
+		clearTimeout(debounce);
+		
+		if (inputValue === '') {
+			actionState = 'starting';
+		} else if (inputValue.trim() === '') {
+			actionState = 'invalid';
+		} else {
+			actionState = 'typing';
+			debounce = setTimeout(() => {
+				actionState = 'success';
+			}, 1000);
+		}
+	});
 	
 </script>
 
