@@ -4,11 +4,16 @@
 
 Este projeto visa implementar uma interface simples para consultar a idade de uma pessoa via API agify.io.
 
+### visite o projeto em 
+
+https://projeto-agify-sveltekit.pages.dev/
+
 ### Tecnologias Utilizadas
 
 - Svelte 5
 - SvelteKit
 - API Agify.io
+- Cloudflare ( deploy )
 
 ### Funcionalidades
 
