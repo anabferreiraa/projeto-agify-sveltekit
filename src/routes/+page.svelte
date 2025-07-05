@@ -12,19 +12,56 @@
 	let actionState = $state('starting');
 	let inputValue = $state('');
 	let debounce = null;
+	let error = $state(null);
 	
+	let localAgeData = $state(null);
+
 	$effect(() => {
 		clearTimeout(debounce);
 		
 		if (inputValue === '') {
+			
+			localAgeData = null;
 			actionState = 'starting';
+			
+			if (window.location.search) {
+				goto('/', { replaceState: true });
+			}
+			return;
 		} else if (inputValue.trim() === '') {
+		
+			localAgeData = null;
 			actionState = 'invalid';
-		} else {
-			actionState = 'typing';
-			debounce = setTimeout(() => {
-				actionState = 'success';
-			}, 1000);
+			return;
+		}
+		
+		actionState = 'typing';
+		
+		debounce = setTimeout(() => {
+			
+			goto(`?name=${encodeURIComponent(inputValue.trim())}`, {
+				keeperFocus: true, 
+				invalidateAll: true 
+			});
+		}, 1000); 
+	});
+	
+	$effect(() => {
+		if (data.error) {
+			error = data.error;
+			actionState = 'error';
+			return;
+		}
+		
+		if (!inputValue) {
+			actionState = 'starting';
+			localAgeData = null;
+			return;
+		}
+		
+		if (data.ageData && data.ageData.name && inputValue.trim() !== '') {
+			localAgeData = data.ageData;
+			actionState = 'success';
 		}
 	});
 	
@@ -59,8 +96,8 @@
 	{/snippet}
 
 	{#snippet responses()}
-	{#if actionState === 'success'}
-		<ApiResponses name={data.ageData.name} age={data.ageData.age} count={data.ageData.count} />
+	{#if actionState === 'success' && localAgeData}
+		<ApiResponses name={localAgeData.name} age={localAgeData.age} count={localAgeData.count} />
 	{/if}
 	{/snippet}
 
@@ -69,7 +106,7 @@
 		<Validation validationMessage="Digite um nome válido e sem espaços" />
 	{/if}
 	{#if actionState === 'error'}
-		<Validation validationMessage="Erro (nome do erro)" />
+		<Validation validationMessage={error || 'Erro na consulta à API'} />
 	{/if}
 	{/snippet}
 
