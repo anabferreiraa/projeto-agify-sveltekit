@@ -21,6 +21,11 @@ https://projeto-agify-sveltekit.pages.dev/
 - Implementação de debounce para melhorar a performance.
 - Exibição de estados de carregamento, sucesso, erro e inválido.
 
+### Como usar
+
+- Acesse o projeto em https://projeto-agify-sveltekit.pages.dev/
+- Insira o nome da pessoa que deseja consultar a idade.
+- O resultado será exibido na tela.
 
 ### Instalação
 
