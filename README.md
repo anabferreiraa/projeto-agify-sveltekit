@@ -1,38 +1,32 @@
-# sv
+![Projeto Agify](static/images/thumb-sveltekit.webp)
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+### Projeto Agify SvelteKit
 
-## Creating a project
+Este projeto visa implementar uma interface simples para consultar a idade de uma pessoa via API agify.io.
 
-If you're seeing this, you've probably already done this step. Congrats!
+### Tecnologias Utilizadas
+
+- Svelte 5
+- SvelteKit
+- API Agify.io
+
+### Funcionalidades
+
+- Consulta à API agify.io para obter a idade de uma pessoa.
+- Implementação de debounce para melhorar a performance.
+- Exibição de estados de carregamento, sucesso, erro e inválido.
+
+
+### Instalação
 
 ```bash
-# create a new project in the current directory
-npx sv create
-
-# create a new project in my-app
-npx sv create my-app
+npm install
 ```
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+### Execução
 
 ```bash
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-## Building
 
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
